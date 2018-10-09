@@ -1,0 +1,1 @@
+# Adsophic.Framework.WordProcessing

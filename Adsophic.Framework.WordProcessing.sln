@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adsophic.Framework.WordProcessing.Test", "Adsophic.Framework.WordProcessing.Test\Adsophic.Framework.WordProcessing.Test.csproj", "{9361D633-441D-4424-9C17-81CE976C0277}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A14209B8-D480-4F8A-A5F6-EB27538C6A5B} = {A14209B8-D480-4F8A-A5F6-EB27538C6A5B}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adsophic.Framework.WordProcessing", "Adsophic.Framework.WordProcessing\Adsophic.Framework.WordProcessing.csproj", "{A14209B8-D480-4F8A-A5F6-EB27538C6A5B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9361D633-441D-4424-9C17-81CE976C0277}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9361D633-441D-4424-9C17-81CE976C0277}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9361D633-441D-4424-9C17-81CE976C0277}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9361D633-441D-4424-9C17-81CE976C0277}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A14209B8-D480-4F8A-A5F6-EB27538C6A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A14209B8-D480-4F8A-A5F6-EB27538C6A5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A14209B8-D480-4F8A-A5F6-EB27538C6A5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A14209B8-D480-4F8A-A5F6-EB27538C6A5B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8CF469B8-FFB0-474E-967E-2130C5A87AF2}
+	EndGlobalSection
+EndGlobal
