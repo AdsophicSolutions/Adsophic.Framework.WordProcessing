@@ -30,7 +30,7 @@ namespace Adsophic.Framework.WordProcessing.Test
             var wordSearch = WordSearch.Instance;
             wordSearch.Initialize().GetAwaiter().GetResult();
 
-            Assert.IsFalse(wordSearch.FindWord("lion").GetAwaiter().GetResult());
+            Assert.IsFalse(wordSearch.FindWord("liondog").GetAwaiter().GetResult());
         }
 
         [TestMethod]
@@ -38,8 +38,10 @@ namespace Adsophic.Framework.WordProcessing.Test
         {
             var wordSearch = WordSearch.Instance;
             wordSearch.Initialize().GetAwaiter().GetResult();
-            
-            Assert.AreEqual(expected: 2, actual: wordSearch.FindWordsFromCharacters("na").GetAwaiter().GetResult().Count());
+
+            var wordCount = wordSearch.FindWordsFromCharacters("na").GetAwaiter().GetResult().Count();
+            Assert.AreEqual(expected: 4, 
+                actual: wordCount);
         }
 
         [TestMethod]
@@ -49,7 +51,7 @@ namespace Adsophic.Framework.WordProcessing.Test
             wordSearch.Initialize().GetAwaiter().GetResult();
 
             var results = wordSearch.FindWordsFromCharacters("na").GetAwaiter().GetResult().ToHashSet();
-            Assert.AreEqual(expected: 2, actual: results.Count);
+            Assert.AreEqual(expected: 4, actual: results.Count);
             Assert.IsTrue(results.Contains("a"));
             Assert.IsTrue(results.Contains("an"));
         }
@@ -61,7 +63,7 @@ namespace Adsophic.Framework.WordProcessing.Test
             wordSearch.Initialize().GetAwaiter().GetResult();
 
             var results = wordSearch.FindWordsFromCharacters("na", 2).GetAwaiter().GetResult().ToHashSet();
-            Assert.AreEqual(expected: 1, actual: results.Count);            
+            Assert.AreEqual(expected: 2, actual: results.Count);            
             Assert.IsTrue(results.Contains("an"));
         }
 
@@ -73,6 +75,16 @@ namespace Adsophic.Framework.WordProcessing.Test
 
             var results = wordSearch.FindWordsFromCharacters("na", 3).GetAwaiter().GetResult().ToHashSet();
             Assert.AreEqual(expected: 0, actual: results.Count);
+        }
+
+        [TestMethod]
+        public void WordSearchWordFromCharactersResultsManyResultsTest()
+        {
+            var wordSearch = WordSearch.Instance;
+            wordSearch.Initialize().GetAwaiter().GetResult();
+
+            var results = wordSearch.FindWordsFromCharacters("liondog", 3).GetAwaiter().GetResult().ToHashSet();
+            Assert.AreEqual(expected: 20, actual: results.Count);
         }
     }
 }

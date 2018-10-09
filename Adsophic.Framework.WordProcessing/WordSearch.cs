@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -66,17 +67,38 @@ namespace Adsophic.Framework.WordProcessing
         private static Trei InitializeTrei()
         {
             var trei = new Trei();
-            trei.AddWord("dog");
-            trei.AddWord("cat");
-            trei.AddWord("camel");
-            trei.AddWord("goat");
-            trei.AddWord("sheep");
-            trei.AddWord("cow");
-            trei.AddWord("ram");
-            trei.AddWord("a");
-            trei.AddWord("an");
+            var wordCount = 0;
+            var printInterval = 300;
+            using (var stream = GetWordStream())
+            {
+                var word = stream.ReadLine();
+                while (word != null)
+                {
+                    if (trei.AddWord(word))
+                        wordCount++;
+                    if ((wordCount % printInterval) == 0)
+                        Console.WriteLine($"Completed {wordCount} words");
+                    word = stream.ReadLine();
+                }
+            }
+
+            Console.WriteLine($"Completed {wordCount} words");
+            //    trei.AddWord("dog");
+            //trei.AddWord("cat");
+            //trei.AddWord("camel");
+            //trei.AddWord("goat");
+            //trei.AddWord("sheep");
+            //trei.AddWord("cow");
+            //trei.AddWord("ram");
+            //trei.AddWord("a");
+            //trei.AddWord("an");
 
             return trei;
+        }
+
+        private static StreamReader GetWordStream()
+        {
+            return new StreamReader(File.OpenRead("google-10000-english-usa.txt"));
         }
 
         /// <summary>

@@ -61,7 +61,8 @@ namespace Adsophic.Framework.WordProcessing
 
             //Update word count for each traversed node if this is a new word. 
             //If an existing word is added isNewWord will remain false
-            if (!isNewWord) traversedNodes.ForEach(t => t.WordCount++);
+            if (isNewWord) traversedNodes.ForEach(t => t.WordCount++);
+
             //Mark last node as IsWord. This is required 
             //Example: When we add word "cat" we don't want the FindWord to return
             //true if we search for "ca". By setting IsWord on last node only
