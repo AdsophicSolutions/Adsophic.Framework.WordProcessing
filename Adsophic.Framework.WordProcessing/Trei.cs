@@ -118,8 +118,9 @@ namespace Adsophic.Framework.WordProcessing
             //return empty list of string in
             if ((characters?.Length ?? 0) == 0) return new string[0];
 
-            //list to store all words found
-            var results = new List<string>();
+            //set to store all words found. We use set instead 
+            //of a list to restrict output to distinct words
+            var results = new HashSet<string>();
 
             //Internal method to aid recursive search for words
             void wordSearchHelper(string charactersSoFar, TreiNode curNode, string remaining)

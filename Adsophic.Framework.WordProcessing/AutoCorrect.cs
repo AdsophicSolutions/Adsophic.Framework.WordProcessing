@@ -76,7 +76,13 @@ namespace Adsophic.Framework.WordProcessing
                  {
                      //Find distance for the word
                      var distance = GetEditDistance(word, wordToTest);
-                     var maxDistanceForWord = Math.Max(word.Length / 2 - 1, 1);
+                     //Restricting the number of edits. Vary it 
+                     //by word size, but don't make it greater than 
+                     //4. For large words distance cannot be 
+                     //more than 4
+                     var maxDistanceForWord = Math.Min(
+                         Math.Max(word.Length / 2 - 1, 1), 
+                         4);
 
                      //We cut off the search if edit distance is equal to largest distance to search.
                      //We want to only include words where edit distance is less than the largest 
