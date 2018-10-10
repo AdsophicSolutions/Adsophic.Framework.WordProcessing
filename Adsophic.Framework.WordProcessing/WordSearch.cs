@@ -28,6 +28,11 @@ namespace Adsophic.Framework.WordProcessing
         private Trei trei;
 
         /// <summary>
+        /// Autocorrect for all dictionary words
+        /// </summary>
+        private AutoCorrect autoCorrect;
+
+        /// <summary>
         /// Access to Singleton instance
         /// </summary>
         public static WordSearch Instance
@@ -38,7 +43,13 @@ namespace Adsophic.Framework.WordProcessing
         /// <summary>
         /// Helper to create a single instance of Trei
         /// </summary>
-        private Lazy<Trei> initializer = new Lazy<Trei>(() => InitializeTrei());
+        private Lazy<Trei> treiInitializer = new Lazy<Trei>(() => InitializeTrei());
+
+        /// <summary>
+        /// Helper to initialize the single instance of the AutoCorrect
+        /// </summary>
+        private Lazy<AutoCorrect> autoCorrectInitializer = new Lazy<AutoCorrect>(() => InitializeAutoCorrect());
+
 
         /// <summary>
         /// Initializes WordSearch with dictionary words
@@ -50,7 +61,8 @@ namespace Adsophic.Framework.WordProcessing
             //Start initialization in background
             await Task.Factory.StartNew(() =>
             {
-                trei = initializer.Value;
+                trei = treiInitializer.Value;
+                autoCorrect = autoCorrectInitializer.Value;
                 initialized = true;
             }
             );
@@ -66,6 +78,7 @@ namespace Adsophic.Framework.WordProcessing
         /// </summary>
         private static Trei InitializeTrei()
         {
+            Console.WriteLine($"Initializing Trei with words");
             var trei = new Trei();
             var wordCount = 0;
             var printInterval = 300;
@@ -82,18 +95,34 @@ namespace Adsophic.Framework.WordProcessing
                 }
             }
 
-            Console.WriteLine($"Completed {wordCount} words");
-            //    trei.AddWord("dog");
-            //trei.AddWord("cat");
-            //trei.AddWord("camel");
-            //trei.AddWord("goat");
-            //trei.AddWord("sheep");
-            //trei.AddWord("cow");
-            //trei.AddWord("ram");
-            //trei.AddWord("a");
-            //trei.AddWord("an");
-
+            Console.WriteLine($"Completed Trei {wordCount} words");
             return trei;
+        }
+
+        /// <summary>
+        /// Initializes an AutoCorrect object to use locally
+        /// </summary>
+        private static AutoCorrect InitializeAutoCorrect()
+        {
+            Console.WriteLine($"Initializing autocorrect with words");
+            var autoCorrect = new AutoCorrect();
+            var wordCount = 0;
+            var printInterval = 300;
+            using (var stream = GetWordStream())
+            {
+                var word = stream.ReadLine();
+                while (word != null)
+                {
+                    if (autoCorrect.AddWord(word))
+                        wordCount++;
+                    if ((wordCount % printInterval) == 0)
+                        Console.WriteLine($"Completed Autocorrect {wordCount} words");
+                    word = stream.ReadLine();
+                }
+            }
+
+            Console.WriteLine($"Completed autocorrect {wordCount} words");
+            return autoCorrect;
         }
 
         private static StreamReader GetWordStream()
@@ -128,6 +157,21 @@ namespace Adsophic.Framework.WordProcessing
 
             //Now perform search 
             return await trei.FindWordsFromCharacters(characters, wordMinimumSize);
+        }
+
+        /// <summary>
+        /// Finds words with the close edit distance that start with the same 
+        /// letter 
+        /// </summary>
+        /// <param name="word">Word to match</param>
+        /// <returns>IEnumerable of strings representing the words that match the search word</returns>
+        public async Task<IEnumerable<string>> FindClosestMatchingWords(string word)
+        {
+            //Make sure initialization is performed
+            await Initialize();
+
+            //Now perform search via autocorrect
+            return await autoCorrect.FindClosestWords(word);
         }
     }
 }

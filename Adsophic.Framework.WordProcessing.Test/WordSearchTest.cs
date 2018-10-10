@@ -86,5 +86,27 @@ namespace Adsophic.Framework.WordProcessing.Test
             var results = wordSearch.FindWordsFromCharacters("liondog", 3).GetAwaiter().GetResult().ToHashSet();
             Assert.AreEqual(expected: 20, actual: results.Count);
         }
+
+        [TestMethod]
+        public void WordSearchWordGetAutocorrectSuggestionsTest1()
+        {
+            var wordSearch = WordSearch.Instance;
+            wordSearch.Initialize().GetAwaiter().GetResult();
+
+            var results = wordSearch.FindClosestMatchingWords("lion").GetAwaiter().GetResult().ToArray();
+            Assert.AreEqual(expected: 3, actual: results.Length);
+            Assert.AreEqual(expected: "lion", actual: results[0]);
+        }
+
+        [TestMethod]
+        public void WordSearchWordGetAutocorrectSuggestionsTest2()
+        {
+            var wordSearch = WordSearch.Instance;
+            wordSearch.Initialize().GetAwaiter().GetResult();
+
+            var results = wordSearch.FindClosestMatchingWords("becauuse").GetAwaiter().GetResult().ToArray();
+            Assert.AreEqual(expected: 2, actual: results.Length);
+            Assert.AreEqual(expected: "because", actual: results[0]);
+        }
     }
 }
