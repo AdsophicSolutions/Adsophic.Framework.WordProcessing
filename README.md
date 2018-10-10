@@ -7,9 +7,9 @@ Solution consists of two projects
 - `Adsophic.Framework.WordProcessing`
 - `Adsophic.Framework.WordProcessing.Test`
 
-As you would expect, *Adsophic.Framework.WordProcessing* contains implementation. Class *Adsophic.Framework.WordProcessing.WordSearch* exposes implementation to the outside world. It creates and maintains references to algorithms. Algorithms are themselves implemented in classes *Adsophic.Framework.WordProcessing.Trei* and *Adsophic.Framework.WorkProcessing.AutoCorrect*.
+As you would expect, `Adsophic.Framework.WordProcessing` contains implementation. Class `Adsophic.Framework.WordProcessing.WordSearch` exposes implementation to the outside world. It creates and maintains references to algorithms. Algorithms are themselves implemented in classes `Adsophic.Framework.WordProcessing.Trei` and `Adsophic.Framework.WorkProcessing.AutoCorrect`.
 
-*Adsophic.Framework.WordProcessing.Test* contains relevant tests.
+`Adsophic.Framework.WordProcessing.Test` contains relevant tests.
 
 ## Algorithms
 ### Trei - Find matching words
