@@ -4,8 +4,8 @@ In this repository we tackle some common word related algorithms. One of the com
 
 ## Solution Structure
 Solution consists of two projects
-- Adsophic.Framework.WordProcessing
-- Adsophic.Framework.WordProcessing.Test
+- `Adsophic.Framework.WordProcessing`
+- `Adsophic.Framework.WordProcessing.Test`
 
 As you would expect, *Adsophic.Framework.WordProcessing* contains implementation. Class *Adsophic.Framework.WordProcessing.WordSearch* exposes implementation to the outside world. It creates and maintains references to algorithms. Algorithms are themselves implemented in classes *Adsophic.Framework.WordProcessing.Trei* and *Adsophic.Framework.WorkProcessing.AutoCorrect*.
 
